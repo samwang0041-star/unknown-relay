@@ -7,12 +7,12 @@
 <p align="center">
   <a href="#中文">中文</a> ·
   <a href="#english">English</a> ·
-  <a href="https://ai.wangyuzhao.cn/">体验 UNKNOWN</a> ·
+  <a href="https://chat.wangyuzhao.cn/">体验 UNKNOWN</a> ·
   <a href="mailto:samwang0041@gmail.com">Contact</a>
 </p>
 
 <p align="center">
-  <a href="https://ai.wangyuzhao.cn/">
+  <a href="https://chat.wangyuzhao.cn/">
     <img src="public/unknown-experience-qr.png" alt="UNKNOWN experience QR code" width="180" />
   </a>
 </p>
@@ -59,7 +59,7 @@ This site is open source. It does not store nicknames, avatars, phone numbers, o
 
 ## 产品形态 / Product Shape
 
-- 首屏以 `UNKNOWN` 和主视觉作为产品入口；体验地址：[https://ai.wangyuzhao.cn/](https://ai.wangyuzhao.cn/)。
+- 首屏以 `UNKNOWN` 和主视觉作为产品入口；体验地址：[https://chat.wangyuzhao.cn/](https://chat.wangyuzhao.cn/)。
 - Users enter through the WeChat AI / OpenClaw entry point.
 - 服务端只保留匿名内部身份，不保存昵称、头像、手机号或明文聊天记录。
 - Matching only happens between eligible users who are open, not blocked, and still reachable through the OpenClaw window.
