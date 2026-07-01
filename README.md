@@ -21,20 +21,44 @@
 
 ## 这是什么
 
-微信扫码，和一个随机的陌生人聊一小时。
+UNKNOWN 是一个通过微信 AI 入口（OpenClaw / iLink）连接两个人的产品。披着 AI 入口的外壳，做的是人和人之间的对话。
 
-## 能干什么
+## 两个模式
 
-- 扫码进入微信，发 `打开`，系统自动匹配一个同时在线的人
-- 两人 1v1 对话，限时 60 分钟，到点自动断开
-- 发 `暂停` 停止匹配，发 `打开` 重新开始
-- 发 `离开` 提前结束当前对话
-- 举报对方，被举报三次的人自动封禁
-- 不注册、不留名、不存聊天记录
+### Random Matching — 随机匹配
+
+扫码进入微信 AI 入口，发 `打开`，系统和另一个同时在线的人配对。
+
+- 1v1 对话，限时 60 分钟，每 10 分钟一次时间提醒
+- 到点自动断开
+- 发 `暂停` 停止匹配，发 `打开` 重新开启
+- 发 `离开` 提前结束，需二次确认（`确认离开`）
+- 发 `举报` 举报对方，被举报 3 次自动封禁
+- 离开或举报后双方永久互斥，不会再匹配到同一个人
+- 入口有约 24 小时可达窗口，快到期时会询问是否续期
+
+指令：`打开` · `继续` · `暂停` · `离开` · `确认离开` · `举报` · `帮助`
+
+### Private Relay — 私密转发
+
+网页上生成两张入口二维码。A 先扫第一张，系统识别 A 之后生成第二张，把第二张交给 B。B 扫进来后，两人通过同一个微信 AI 入口对话。
+
+- 不是随机匹配，是定向连接：你决定把入口给谁
+- 发 `/断开` 断开连接，关系立即消失
+- 二维码有有效期，过期需重新生成
+- 网页实时显示连接状态
+
+## 隐私
+
+- 不注册、不留昵称、不存头像、不记手机号
+- 用户身份只保留 HMAC-SHA-256 哈希
+- 不明文存储聊天记录
+- Provider 凭据用 AES-GCM 加密
+- Admin 后台不暴露原始身份信息
 
 ## 技术
 
-Next.js + PostgreSQL + Prisma + 微信 OpenClaw
+Next.js App Router · PostgreSQL · Prisma · WeChat OpenClaw (iLink) · Vitest · Playwright
 
 ## 跑起来
 
@@ -46,7 +70,10 @@ DATABASE_URL='postgresql://yuriwong@localhost:5432/whoareyou' npx prisma generat
 DATABASE_URL='postgresql://yuriwong@localhost:5432/whoareyou' ADMIN_TOKEN='dev-admin-token' PROVIDER_USER_HASH_SECRET='dev-provider-user-hash-secret' PROVIDER_CREDENTIAL_ENCRYPTION_SECRET='whoareyou-dev-provider-credential-encryption-secret' npm run dev
 ```
 
-Web: http://localhost:3000 · Admin: http://localhost:3000/admin
+- Web: http://localhost:3000
+- Admin: http://localhost:3000/admin
+- Fake QR: `PROVIDER_MODE=fake npm run dev`
+- Real QR: `PROVIDER_MODE=openclaw npm run dev`
 
 ## 部署
 
